@@ -7,7 +7,7 @@ function SearchResultsContainer({ onRowClick, movie }) {
             <p>
                 {movie.vote_average +
                     " Rating, " +
-                    movie.release_date.split("-", 1)}
+                    (movie.release_date && movie.release_date.split("-", 1))}
             </p>
         </div>
     );

@@ -1,6 +1,19 @@
 import React, { useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 
+// Standard debounce function for API fetching.
+// function debounce(func, wait) {
+//     let timeout;
+//     return function (...args) {
+//         const context = this;
+//         if (timeout) clearTimeout(timeout);
+//         timeout = setTimeout(() => {
+//             timeout = null;
+//             func.apply(context, args);
+//         }, wait);
+//     };
+// }
+
 // States comes from parent component - Header.
 function Search({
     query,
@@ -17,25 +30,21 @@ function Search({
         const url = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
         function fetchData() {
-            if (query.length < 3) {
-                setMovies([]);
-            } else {
-                fetch(url)
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error("Error - failed to fetch.");
-                        }
-                        return response.json();
-                    })
-                    .then((movieData) => {
-                        const shownMovies = movieData.results.splice(1, 8);
-                        setMovies(shownMovies);
-                        isSubmitted(false);
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
+            fetch(url)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error - failed to fetch.");
+                    }
+                    return response.json();
+                })
+                .then((movieData) => {
+                    const shownMovies = movieData.results.splice(1, 8);
+                    setMovies(shownMovies);
+                    isSubmitted(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
         fetchData();
     }, [query, setMovies, isSubmitted]);
@@ -45,17 +54,6 @@ function Search({
         const value = e.target.value;
         setQuery(value);
     };
-
-    function returnResults(movie) {
-        return (
-            <SearchResultsContainer
-                movies={movies}
-                movie={movie}
-                key={movie.id}
-                onRowClick={() => setQuery(movie.title)}
-            />
-        );
-    }
 
     return (
         <div>
@@ -78,7 +76,17 @@ function Search({
                 </svg>
             </button>
             <div className="results-container">
-                {!submitted && movies.map(returnResults)}
+                {!submitted &&
+                    query.length > 2 &&
+                    movies.map((movie) => {
+                        return (
+                            <SearchResultsContainer
+                                movie={movie}
+                                key={movie.id}
+                                onRowClick={() => setQuery(movie.title)}
+                            />
+                        );
+                    })}
             </div>
         </div>
     );
