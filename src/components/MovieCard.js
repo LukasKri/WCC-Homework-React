@@ -1,6 +1,5 @@
 import React from "react";
 
-// CURRENTLY NOT WORKING
 function MovieCard({ movie }) {
     return (
         <div className="card">
