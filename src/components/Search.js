@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 
-function Search() {
-    // State for input query
-    const [query, setQuery] = useState("");
-    // State for movies array
-    const [movies, setMovies] = useState([]);
-
+// States comes from parent component Header
+function Search({ query, setQuery, movies, setMovies }) {
     // useEffect hook for search input updates
     useEffect(() => {
         console.log("useEffect ran");
 
         const url = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
-        const fetchData = () => {
+        function fetchData() {
             if (query.length < 3) {
                 setMovies([]);
             } else {
@@ -32,9 +28,9 @@ function Search() {
                         console.log(err);
                     });
             }
-        };
+        }
         fetchData();
-    }, [query]);
+    }, [query, setMovies]);
 
     // Input event handler (updates the state when input value changes)
     const handleChange = (e) => {
