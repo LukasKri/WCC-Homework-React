@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 
 function Search() {
+    // State for input query
     const [query, setQuery] = useState("");
     // State for movies array
     const [movies, setMovies] = useState([]);
@@ -58,7 +59,7 @@ function Search() {
             <input
                 autoComplete="off"
                 type="text"
-                name="query" //SITO TIKRAI REIKIA?
+                name="query" // Do I need this one?
                 placeholder="Enter movie name"
                 value={query}
                 onChange={handleChange}
