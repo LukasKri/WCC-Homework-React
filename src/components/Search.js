@@ -27,26 +27,28 @@ function Search({
     useEffect(() => {
         console.log("useEffect ran");
 
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
+        const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
-        function fetchData() {
-            fetch(url)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Error - failed to fetch.");
-                    }
-                    return response.json();
-                })
-                .then((movieData) => {
-                    const shownMovies = movieData.results.splice(1, 8);
-                    setMovies(shownMovies);
-                    isSubmitted(false);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+        async function fetchData(query) {
+            if (!query) {
+                return;
+            }
+
+            try {
+                const response = await fetch(API_URL);
+                const movieData = await response.json();
+                if (!response.ok) {
+                    throw new Error("Error - failed to fetch.");
+                }
+
+                const shownMovies = movieData.results.splice(1, 8);
+                setMovies(shownMovies);
+                isSubmitted(false);
+            } catch (err) {
+                console.log(err.message);
+            }
         }
-        fetchData();
+        fetchData(query);
     }, [query, setMovies, isSubmitted]);
 
     // Input event handler (updates the query state when input value changes).

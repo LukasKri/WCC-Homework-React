@@ -8,7 +8,7 @@ function Header() {
     // State for movies array.
     const [movies, setMovies] = useState([]);
     // State for form submission.
-    const [submitted, isSubmitted] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
     // State for loading after submission.
     const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ function Header() {
 
             setMovies(data.results);
             setLoading(false);
-            isSubmitted(true);
+            setSubmitted(true);
         } catch (err) {
             console.log(err);
         }
@@ -42,12 +42,12 @@ function Header() {
                             movies={movies}
                             setMovies={setMovies}
                             submitted={submitted}
-                            isSubmitted={isSubmitted}
+                            isSubmitted={setSubmitted}
                         />
                     </form>
                     {/* {submitted && movies.length === 0 && (
                         <h1>
-                            Sorry, there is no movie with name "{`${query}`}"
+                            Sorry, there is no movie with the name "{`${query}`}"
                         </h1>
                     )} */}
                     {loading && <h1>Loading...</h1>}
