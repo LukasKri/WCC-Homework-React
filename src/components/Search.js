@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 
-// Standard debounce function for API fetching.
+// Standard debounce function for API fetching - don't know if works.
 // function debounce(func, wait) {
 //     let timeout;
 //     return function (...args) {
@@ -41,7 +41,7 @@ function Search({
                     throw new Error("Error - failed to fetch.");
                 }
 
-                const shownMovies = movieData.results.splice(1, 8);
+                const shownMovies = movieData.results.splice(0, 8);
                 setMovies(shownMovies);
                 isSubmitted(false);
             } catch (err) {

@@ -23,7 +23,7 @@ function Header() {
             const res = await fetch(API_URL);
             const data = await res.json();
 
-            setMovies(data.results);
+            setMovies(data.results.splice(0, 4));
             setLoading(false);
             setSubmitted(true);
         } catch (err) {
