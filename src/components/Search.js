@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 import debounce from "lodash/debounce";
 
@@ -57,10 +57,9 @@ function Search({
     }, [query, setMovies, setSubmitted]);
 
     // Input event handler (updates the query state when input value changes).
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setQuery(value);
-    };
+    const handleChange = debounce((text) => {
+        setQuery(text);
+    }, 1000);
 
     return (
         <div>
@@ -69,8 +68,8 @@ function Search({
                 type="text"
                 name="query" // Do I need this one?
                 placeholder="Enter movie name"
-                value={query}
-                onChange={handleChange}
+                // value={query}
+                onChange={(e) => handleChange(e.target.value)}
             />
             <button type="submit">
                 <svg
