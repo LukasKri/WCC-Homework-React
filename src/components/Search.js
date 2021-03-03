@@ -21,7 +21,7 @@ function Search({
     movies,
     setMovies,
     submitted,
-    isSubmitted,
+    setSubmitted,
 }) {
     // useEffect hook for search input updates.
     useEffect(() => {
@@ -43,13 +43,13 @@ function Search({
 
                 const shownMovies = movieData.results.splice(0, 8);
                 setMovies(shownMovies);
-                isSubmitted(false);
+                setSubmitted(false);
             } catch (err) {
                 console.log(err.message);
             }
         }
         fetchData(query);
-    }, [query, setMovies, isSubmitted]);
+    }, [query, setMovies, setSubmitted]);
 
     // Input event handler (updates the query state when input value changes).
     const handleChange = (e) => {

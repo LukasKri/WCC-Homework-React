@@ -9,7 +9,7 @@ function Header() {
     const [movies, setMovies] = useState([]);
     // State for form submission.
     const [submitted, setSubmitted] = useState(false);
-    // State for loading after submission.
+    // State for loading after form submission.
     const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
@@ -23,7 +23,7 @@ function Header() {
             const res = await fetch(API_URL);
             const data = await res.json();
 
-            setMovies(data.results.splice(0, 4));
+            setMovies(data.results.splice(0, 5));
             setLoading(false);
             setSubmitted(true);
         } catch (err) {
@@ -42,7 +42,7 @@ function Header() {
                             movies={movies}
                             setMovies={setMovies}
                             submitted={submitted}
-                            isSubmitted={setSubmitted}
+                            setSubmitted={setSubmitted}
                         />
                     </form>
                     {/* {submitted && movies.length === 0 && (
@@ -53,9 +53,13 @@ function Header() {
                     {loading && <h1>Loading...</h1>}
                     <div className="card-list">
                         {submitted &&
-                            movies.map((movie) => (
-                                <MovieCard movie={movie} key={movie.id} />
-                            ))}
+                            movies
+                                .filter((movie) => {
+                                    return movie.poster_path;
+                                })
+                                .map((movie) => (
+                                    <MovieCard movie={movie} key={movie.id} />
+                                ))}
                     </div>
                 </div>
             </header>
