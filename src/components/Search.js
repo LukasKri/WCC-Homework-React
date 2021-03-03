@@ -25,30 +25,34 @@ function Search({
 }) {
     // useEffect hook for search input updates.
     useEffect(() => {
-        console.log("useEffect ran");
+        const timer = setTimeout(() => {
+            console.log("useEffect ran");
 
-        const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
+            const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
-        async function fetchData(query) {
-            if (!query) {
-                return;
-            }
-
-            try {
-                const response = await fetch(API_URL);
-                const movieData = await response.json();
-                if (!response.ok) {
-                    throw new Error("Error - failed to fetch.");
+            async function fetchData(query) {
+                if (!query) {
+                    return;
                 }
 
-                const shownMovies = movieData.results.splice(0, 8);
-                setMovies(shownMovies);
-                setSubmitted(false);
-            } catch (err) {
-                console.log(err.message);
+                try {
+                    const response = await fetch(API_URL);
+                    const movieData = await response.json();
+                    if (!response.ok) {
+                        throw new Error("Error - failed to fetch.");
+                    }
+
+                    const shownMovies = movieData.results.splice(0, 8);
+                    setMovies(shownMovies);
+                    setSubmitted(false);
+                } catch (err) {
+                    console.log(err.message);
+                }
             }
-        }
-        fetchData(query);
+            fetchData(query);
+        }, 1000);
+
+        return () => clearTimeout(timer);
     }, [query, setMovies, setSubmitted]);
 
     // Input event handler (updates the query state when input value changes).
