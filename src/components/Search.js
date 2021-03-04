@@ -14,20 +14,20 @@ function Search({ query, setQuery, movies, setMovies }) {
 
         async function fetchData(query) {
             if (!query || query.length < 3) {
-                return setMovies([]);
-            }
+                setMovies([]);
+            } else {
+                try {
+                    const response = await fetch(API_URL);
+                    const movieData = await response.json();
+                    if (!response.ok) {
+                        throw new Error("Error - failed to fetch.");
+                    }
 
-            try {
-                const response = await fetch(API_URL);
-                const movieData = await response.json();
-                if (!response.ok) {
-                    throw new Error("Error - failed to fetch.");
+                    const shownMovies = movieData.results.splice(0, 8);
+                    setMovies(shownMovies);
+                } catch (err) {
+                    console.log(err.message);
                 }
-
-                const shownMovies = movieData.results.splice(0, 8);
-                setMovies(shownMovies);
-            } catch (err) {
-                console.log(err.message);
             }
         }
         fetchData(query);
