@@ -1,39 +1,20 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
-import debounce from "lodash/debounce";
-
-// Standard debounce function for API fetching - don't know if works.
-// function debounce(func, wait) {
-//     let timeout;
-//     return function (...args) {
-//         const context = this;
-//         if (timeout) clearTimeout(timeout);
-//         timeout = setTimeout(() => {
-//             timeout = null;
-//             func.apply(context, args);
-//         }, wait);
-//     };
-// }
+import useDebounce from "./Debounce";
 
 // States comes from parent component - Header.
-function Search({
-    query,
-    setQuery,
-    movies,
-    setMovies,
-    submitted,
-    setSubmitted,
-}) {
+function Search({ query, setQuery, movies, setMovies }) {
+    const debouncedValue = useDebounce(query, 500);
+
     // useEffect hook for search input updates.
     useEffect(() => {
-        // const timer = setTimeout(() => {
         console.log("useEffect ran");
 
         const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
         async function fetchData(query) {
-            if (!query) {
-                return;
+            if (!query || query.length < 3) {
+                return setMovies([]);
             }
 
             try {
@@ -45,31 +26,27 @@ function Search({
 
                 const shownMovies = movieData.results.splice(0, 8);
                 setMovies(shownMovies);
-                setSubmitted(false);
             } catch (err) {
                 console.log(err.message);
             }
         }
         fetchData(query);
-        // }, 1000);
-
-        // return () => clearTimeout(timer);
-    }, [query, setMovies, setSubmitted]);
+    }, [debouncedValue]);
 
     // Input event handler (updates the query state when input value changes).
-    const handleChange = debounce((text) => {
-        setQuery(text);
-    }, 1000);
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setQuery(value);
+    };
 
     return (
         <div>
             <input
                 autoComplete="off"
                 type="text"
-                name="query" // Do I need this one?
                 placeholder="Enter movie name"
-                // value={query}
-                onChange={(e) => handleChange(e.target.value)}
+                value={query}
+                onChange={handleChange}
             />
             <button type="submit">
                 <svg
@@ -82,17 +59,15 @@ function Search({
                 </svg>
             </button>
             <div className="results-container">
-                {!submitted &&
-                    query.length > 2 &&
-                    movies.map((movie) => {
-                        return (
-                            <SearchResultsContainer
-                                movie={movie}
-                                key={movie.id}
-                                onRowClick={() => setQuery(movie.title)}
-                            />
-                        );
-                    })}
+                {movies.map((movie) => {
+                    return (
+                        <SearchResultsContainer
+                            movie={movie}
+                            key={movie.id}
+                            onRowClick={() => setQuery(movie.title)}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

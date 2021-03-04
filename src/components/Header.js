@@ -5,8 +5,10 @@ import MovieCard from "./MovieCard";
 function Header() {
     // State for input query.
     const [query, setQuery] = useState("");
-    // State for movies array.
+    // State for movies array in autocomplete.
     const [movies, setMovies] = useState([]);
+    // State for movies array in results (movie cards).
+    const [results, setResults] = useState([]);
     // State for form submission.
     const [submitted, setSubmitted] = useState(false);
     // State for loading after form submission.
@@ -23,9 +25,10 @@ function Header() {
             const res = await fetch(API_URL);
             const data = await res.json();
 
-            setMovies(data.results.splice(0, 5));
+            setResults(data.results.splice(0, 5));
             setLoading(false);
             setSubmitted(true);
+            setMovies([]);
         } catch (err) {
             console.log(err);
         }
@@ -41,8 +44,6 @@ function Header() {
                             setQuery={setQuery}
                             movies={movies}
                             setMovies={setMovies}
-                            submitted={submitted}
-                            setSubmitted={setSubmitted}
                         />
                     </form>
                     {/* {submitted && movies.length === 0 && (
@@ -53,7 +54,7 @@ function Header() {
                     {loading && <h1>Loading...</h1>}
                     <div className="card-list">
                         {submitted &&
-                            movies
+                            results
                                 .filter((movie) => {
                                     return movie.poster_path;
                                 })
