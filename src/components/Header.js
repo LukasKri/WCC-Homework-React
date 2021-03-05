@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 function Header() {
     // State for input query.
     const [query, setQuery] = useState("");
-    // State for movies array in autocomplete.
+    // State for movies array in movies suggestion list.
     const [movies, setMovies] = useState([]);
     // State for movies array in results (movie cards).
     const [results, setResults] = useState([]);
@@ -13,15 +13,19 @@ function Header() {
     const [submitted, setSubmitted] = useState(false);
     // State for loading after form submission.
     const [loading, setLoading] = useState(false);
+    // State, which prevents useEffect hook from showing movies suggestion list
+    // when movie title is typed and submitted very fast (before debounce
+    // function execution), not the best solution, but it works (I hope so...).
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
-        // To catch an error.
         try {
             setLoading(true);
+            setShowSuggestions(true);
             const res = await fetch(API_URL);
             const data = await res.json();
 
@@ -44,6 +48,8 @@ function Header() {
                             setQuery={setQuery}
                             movies={movies}
                             setMovies={setMovies}
+                            showSuggestions={showSuggestions}
+                            setShowSuggestions={setShowSuggestions}
                         />
                     </form>
                     {/* {submitted && movies.length === 0 && (
@@ -51,7 +57,7 @@ function Header() {
                             Sorry, there is no movie with the name "{`${query}`}"
                         </h1>
                     )} */}
-                    {loading && <h1>Loading...</h1>}
+                    {loading && query.length !== 0 && <h1>Loading...</h1>}
                     <div className="card-list">
                         {submitted &&
                             results

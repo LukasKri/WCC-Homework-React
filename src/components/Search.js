@@ -2,9 +2,16 @@ import React, { useEffect } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 import useDebounce from "./Debounce";
 
-// States comes from parent component - Header.
-function Search({ query, setQuery, movies, setMovies }) {
-    const debouncedValue = useDebounce(query, 500);
+// States from parent component - Header.
+function Search({
+    query,
+    setQuery,
+    movies,
+    setMovies,
+    showSuggestions,
+    setShowSuggestions,
+}) {
+    const debouncedValue = useDebounce(query, 300);
 
     // useEffect hook for search input updates.
     useEffect(() => {
@@ -13,7 +20,7 @@ function Search({ query, setQuery, movies, setMovies }) {
         const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
 
         async function fetchData(query) {
-            if (!query || query.length < 3) {
+            if (!query || query.length < 3 || showSuggestions) {
                 setMovies([]);
             } else {
                 try {
@@ -31,12 +38,14 @@ function Search({ query, setQuery, movies, setMovies }) {
             }
         }
         fetchData(query);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debouncedValue]);
 
     // Input event handler (updates the query state when input value changes).
     const handleChange = (e) => {
         const value = e.target.value;
         setQuery(value);
+        setShowSuggestions(false);
     };
 
     return (
