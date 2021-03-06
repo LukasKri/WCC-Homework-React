@@ -58,10 +58,7 @@ svg {
     fill: rgb(250, 106, 35);
 }
 
-h3 {
-    margin: 0;
-}
-
+h3,
 p {
     margin: 0;
 }
