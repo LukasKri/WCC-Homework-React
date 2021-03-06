@@ -1,24 +1,15 @@
+/* GENERAL STYLES */
+
 body {
     margin: 0;
     background-color: rgb(250, 250, 252);
-}
-
-.container {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
     max-width: 100%;
     height: 100px;
     background: linear-gradient(to right, #fa6b23, #e33727);
-}
-
-.inside-container {
-    height: 40px;
-    padding-top: 30px;
-    position: relative;
-    margin: 0 auto;
-    width: 855px;
-    margin: 0 auto;
 }
 
 input {
@@ -67,25 +58,6 @@ svg {
     fill: rgb(250, 106, 35);
 }
 
-.results-container {
-    position: absolute;
-    width: 700px;
-    background-color: rgb(255, 255, 255);
-    top: 80px;
-    padding: 0 50px 0;
-}
-
-.results-rows {
-    position: relative;
-    width: 750px;
-    padding: 10px 0 10px 50px;
-    right: 50px;
-}
-
-.results-rows:hover {
-    background-color: wheat;
-}
-
 h3 {
     margin: 0;
 }
@@ -94,7 +66,39 @@ p {
     margin: 0;
 }
 
-/* card results */
+/* SEARCH SUGGESTIONS STYLES */
+
+.inside-container {
+    height: 40px;
+    padding-top: 30px;
+    position: relative;
+    margin: 0 auto;
+    width: 855px;
+    margin: 0 auto;
+}
+
+.results-container {
+    position: absolute;
+    width: 700px;
+    background-color: rgb(255, 255, 255);
+    top: 80px;
+    padding: 0 50px 0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.results-row {
+    position: relative;
+    width: 750px;
+    padding: 10px 0 10px 50px;
+    right: 50px;
+}
+
+.results-row:hover {
+    background-color: wheat;
+}
+
+/* MOVIE CARDS STYLES */
+
 .card-list {
     margin-top: 4rem;
 }
@@ -108,25 +112,34 @@ p {
     display: flex;
 }
 
-.card--title {
+.card-title {
     margin-bottom: 0.5rem;
     font-size: 3.2rem;
 }
 
-.card--image {
-    border-radius: 5%;
+.card-image {
+    border-radius: 10px;
 }
 
-.card--content {
+.card-content {
     margin-left: 20px;
 }
 
-.card--date,
-.card--rating {
+.card-date,
+.card-rating {
     margin: 1.5rem 0;
     font-size: 0.9rem;
 }
 
-.card--desc {
+.card-overview {
     font-size: 1.2rem;
+}
+
+.no-movie,
+.loading {
+    padding: 0.5rem 4rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+    margin-top: 2rem;
+    background-color: white;
 }

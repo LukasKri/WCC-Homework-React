@@ -15,7 +15,7 @@ function Header() {
     const [loading, setLoading] = useState(false);
     // State, which prevents useEffect hook from showing movies suggestion list
     // when movie title is typed and submitted very fast (before debounce
-    // function execution), not the best solution, but it works (I hope so...).
+    // function execution), not the best solution, but it works.
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     async function handleSubmit(e) {
@@ -43,7 +43,7 @@ function Header() {
     }
 
     return (
-        <div className="container">
+        <div>
             <header>
                 <div className="inside-container">
                     <form onSubmit={handleSubmit}>
