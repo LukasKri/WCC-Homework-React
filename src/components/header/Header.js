@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Search from "./Search";
-import MovieCard from "./MovieCard";
+import Search from "../search/Search";
+import MovieCard from "../movie-cards/MovieCard";
 
 function Header() {
     // State for input query.
@@ -58,10 +58,9 @@ function Header() {
                     </form>
                     {submitted && results.length === 0 && showSuggestions && (
                         <div className="no-movie">
-                            <h2>
-                                Sorry, there is no movie with the name:{" "}
-                                {`${query}`}. Please try another title.
-                            </h2>
+                            <h2>Sorry, there is no movie with the name:</h2>
+                            <h2>{`${query}`}</h2>
+                            <h2>Please try another movie title.</h2>
                         </div>
                     )}
                     {loading && query.length !== 0 && (

@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchResultsContainer({ onRowClick, movie }) {
+function SearchResults({ onRowClick, movie }) {
     return (
         <div className="results-row" onClick={onRowClick}>
             <h3>{movie.title}</h3>
@@ -13,4 +13,4 @@ function SearchResultsContainer({ onRowClick, movie }) {
     );
 }
 
-export default SearchResultsContainer;
+export default SearchResults;

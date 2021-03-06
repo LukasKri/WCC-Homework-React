@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import SearchResultsContainer from "./SearchResultsContainer";
-import useDebounce from "./Debounce";
+import SearchResults from "../search-results/SearchResults";
+import useDebounce from "../debounce/Debounce";
 
 // States from parent component - Header.
 function Search({
@@ -69,7 +69,7 @@ function Search({
             <div className="results-container">
                 {movies.map((movie) => {
                     return (
-                        <SearchResultsContainer
+                        <SearchResults
                             movie={movie}
                             key={movie.id}
                             onRowClick={() => setQuery(movie.title)}
