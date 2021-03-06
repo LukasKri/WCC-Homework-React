@@ -22,19 +22,22 @@ function Header() {
         e.preventDefault();
 
         const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
+        if (!query) {
+            return;
+        } else {
+            try {
+                setLoading(true);
+                setShowSuggestions(true);
+                const res = await fetch(API_URL);
+                const data = await res.json();
 
-        try {
-            setLoading(true);
-            setShowSuggestions(true);
-            const res = await fetch(API_URL);
-            const data = await res.json();
-
-            setResults(data.results.splice(0, 5));
-            setLoading(false);
-            setSubmitted(true);
-            setMovies([]);
-        } catch (err) {
-            console.log(err);
+                setResults(data.results.splice(0, 5));
+                setLoading(false);
+                setSubmitted(true);
+                setMovies([]);
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 
@@ -60,13 +63,9 @@ function Header() {
                     {loading && query.length !== 0 && <h1>Loading...</h1>}
                     <div className="card-list">
                         {submitted &&
-                            results
-                                .filter((movie) => {
-                                    return movie.poster_path;
-                                })
-                                .map((movie) => (
-                                    <MovieCard movie={movie} key={movie.id} />
-                                ))}
+                            results.map((movie) => (
+                                <MovieCard movie={movie} key={movie.id} />
+                            ))}
                     </div>
                 </div>
             </header>

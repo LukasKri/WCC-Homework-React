@@ -11,7 +11,7 @@ function Search({
     showSuggestions,
     setShowSuggestions,
 }) {
-    const debouncedValue = useDebounce(query, 300);
+    const debouncedValue = useDebounce(query, 250);
 
     // useEffect hook for search input updates.
     useEffect(() => {
