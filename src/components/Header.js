@@ -60,7 +60,7 @@ function Header() {
                         <div className="no-movie">
                             <h2>
                                 Sorry, there is no movie with the name:{" "}
-                                {`${query}`}, please try another title.
+                                {`${query}`}. Please try another title.
                             </h2>
                         </div>
                     )}
