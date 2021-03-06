@@ -2,7 +2,7 @@ import React from "react";
 
 function SearchResultsContainer({ onRowClick, movie }) {
     return (
-        <div className="results-rows" onClick={onRowClick}>
+        <div className="results-row" onClick={onRowClick}>
             <h3>{movie.title}</h3>
             <p>
                 {movie.vote_average +

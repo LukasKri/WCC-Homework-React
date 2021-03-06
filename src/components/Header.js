@@ -20,8 +20,9 @@ function Header() {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        const API_KEY = "d1540e749ccc1e07651022b415b80efe";
+        const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
 
-        const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=d1540e749ccc1e07651022b415b80efe&language=en-US&query=${query}&page=1&include_adult=false`;
         if (!query) {
             return;
         } else {
@@ -55,12 +56,19 @@ function Header() {
                             setShowSuggestions={setShowSuggestions}
                         />
                     </form>
-                    {/* {submitted && movies.length === 0 && (
-                        <h1>
-                            Sorry, there is no movie with the name "{`${query}`}"
-                        </h1>
-                    )} */}
-                    {loading && query.length !== 0 && <h1>Loading...</h1>}
+                    {submitted && results.length === 0 && showSuggestions && (
+                        <div className="no-movie">
+                            <h2>
+                                Sorry, there is no movie with the name:{" "}
+                                {`${query}`}, please try another title.
+                            </h2>
+                        </div>
+                    )}
+                    {loading && query.length !== 0 && (
+                        <div className="loading">
+                            <h1>Loading...</h1>
+                        </div>
+                    )}
                     <div className="card-list">
                         {submitted &&
                             results.map((movie) => (
