@@ -1,4 +1,5 @@
 import React from "react";
+import "./SearchResults.scss";
 
 function SearchResults({ onRowClick, movie }) {
     return (

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SearchResults from "../search-results/SearchResults";
 import useDebounce from "../debounce/Debounce";
+import "./Search.scss";
 
 // States from parent component - Header.
 function Search({
