@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Search from "../search/Search";
-import MovieCard from "../movie-cards/MovieCard";
+import MovieCard from "../movie-card/MovieCard";
 import "./Header.scss";
 
 function Header() {
@@ -14,9 +14,11 @@ function Header() {
     const [submitted, setSubmitted] = useState(false);
     // State for loading after form submission.
     const [loading, setLoading] = useState(false);
-    // State, which prevents useEffect hook from showing movies suggestion list
-    // when movie title is typed and submitted very fast (before debounce
-    // function execution), not the best solution, but it works.
+    //State for error handling.
+    const [error, setError] = useState(false);
+    /*State, which prevents useEffect hook from showing movies suggestion list 
+    when movie title is typed and submitted very fast (before debounce function 
+    execution), not the best solution, but it works.*/
     const [showSuggestions, setShowSuggestions] = useState(false);
 
     async function handleSubmit(e) {
@@ -28,8 +30,10 @@ function Header() {
             return;
         } else {
             try {
+                setError(false);
                 setLoading(true);
                 setShowSuggestions(true);
+
                 const res = await fetch(API_URL);
                 const data = await res.json();
 
@@ -38,7 +42,9 @@ function Header() {
                 setSubmitted(true);
                 setMovies([]);
             } catch (err) {
-                console.log(err);
+                setError(true);
+                setLoading(false);
+                console.log(err.message);
             }
         }
     }
@@ -55,6 +61,8 @@ function Header() {
                             setMovies={setMovies}
                             showSuggestions={showSuggestions}
                             setShowSuggestions={setShowSuggestions}
+                            error={error}
+                            setError={setError}
                         />
                     </form>
                     {submitted && results.length === 0 && showSuggestions && (
@@ -72,7 +80,8 @@ function Header() {
                         </div>
                     )}
                     <div className="card-list">
-                        {submitted &&
+                        {!error &&
+                            submitted &&
                             results.map((movie) => (
                                 <MovieCard movie={movie} key={movie.id} />
                             ))}

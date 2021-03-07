@@ -11,6 +11,8 @@ function Search({
     setMovies,
     showSuggestions,
     setShowSuggestions,
+    error,
+    setError,
 }) {
     const debouncedValue = useDebounce(query, 200);
 
@@ -24,8 +26,10 @@ function Search({
                 setMovies([]);
             } else {
                 try {
+                    setError(false);
                     const response = await fetch(API_URL);
                     const movieData = await response.json();
+
                     if (!response.ok) {
                         throw new Error("Error - failed to fetch.");
                     }
@@ -33,6 +37,7 @@ function Search({
                     const shownMovies = movieData.results.splice(0, 8);
                     setMovies(shownMovies);
                 } catch (err) {
+                    setError(true);
                     console.log(err.message);
                 }
             }
@@ -68,15 +73,16 @@ function Search({
                 </svg>
             </button>
             <div className="results-container">
-                {movies.map((movie) => {
-                    return (
-                        <SearchResults
-                            movie={movie}
-                            key={movie.id}
-                            onRowClick={() => setQuery(movie.title)}
-                        />
-                    );
-                })}
+                {!error &&
+                    movies.map((movie) => {
+                        return (
+                            <SearchResults
+                                movie={movie}
+                                key={movie.id}
+                                onRowClick={() => setQuery(movie.title)}
+                            />
+                        );
+                    })}
             </div>
         </div>
     );
