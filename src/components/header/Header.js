@@ -68,9 +68,7 @@ function Header() {
                     {submitted && results.length === 0 && showSuggestions && (
                         <div className="no-movie">
                             <h2>Sorry, there is no movie with the title:</h2>
-                            <h2 className="middle">
-                                <i>{`${query}`}</i>
-                            </h2>
+                            <h2 className="middle">{`${query}`}</h2>
                             <h2>Please try another movie title.</h2>
                         </div>
                     )}
