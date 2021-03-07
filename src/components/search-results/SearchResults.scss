@@ -8,9 +8,9 @@ p {
     position: relative;
     right: 50px;
     width: 750px;
-}
 
-.results-row:hover {
-    background-color: wheat;
-    cursor: pointer;
+    &:hover {
+        background-color: rgb(230, 235, 239);
+        cursor: pointer;
+    }
 }

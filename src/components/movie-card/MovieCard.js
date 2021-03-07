@@ -14,8 +14,10 @@ function MovieCard({ movie }) {
             )}
             <div className="card-content">
                 <h3 className="card-title">{movie.title}</h3>
-                <p className="card-date">RELEASED: {movie.release_date}</p>
-                <p className="card-rating">RATING: {movie.vote_average}</p>
+                <div className="card-details">
+                    <p>RELEASE DATE: {movie.release_date}</p>
+                    <p>RATING: {movie.vote_average}</p>
+                </div>
                 <p className="card-overview">{movie.overview}</p>
             </div>
         </div>

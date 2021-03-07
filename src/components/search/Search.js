@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import SearchResults from "../search-results/SearchResults";
 import useDebounce from "../debounce/Debounce";
+
+import movieLogo from "../../icons/movie.svg";
+
 import "./Search.scss";
 
 // States from parent component - Header.
@@ -55,6 +58,7 @@ function Search({
 
     return (
         <div>
+            <img className="movie-svg" src={movieLogo} alt="movie-logo" />
             <input
                 autoComplete="off"
                 type="text"

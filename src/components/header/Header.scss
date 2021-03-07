@@ -10,22 +10,22 @@ header {
     padding-top: 30px;
     position: relative;
     width: 855px;
+
+    .card-list {
+        margin-top: 60px;
+    }
 }
 
 .no-movie,
 .loading {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
-    margin-top: 2rem;
-    padding: 0.5rem 4rem;
-}
+    margin-top: 30px;
+    padding: 10px 60px;
 
-.middle {
-    font-size: 2rem;
-    text-align: center;
-}
-
-.card-list {
-    margin-top: 4rem;
+    .middle {
+        font-size: 30px;
+        text-align: center;
+    }
 }
