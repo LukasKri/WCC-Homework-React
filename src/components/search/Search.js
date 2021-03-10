@@ -45,7 +45,6 @@ function Search({
             }
         }
         fetchData(query);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debouncedValue]);
 
     // Input event handler (updates the query state when input value changes).
