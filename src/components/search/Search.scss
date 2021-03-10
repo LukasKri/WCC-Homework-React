@@ -52,6 +52,10 @@ button {
     width: 50px;
     cursor: pointer;
 
+    &:hover {
+        background-color: rgb(241, 241, 241);
+    }
+
     svg {
         fill: rgb(250, 106, 35);
     }
