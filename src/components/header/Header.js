@@ -66,14 +66,14 @@ function Header() {
                     </form>
                     {submitted && results.length === 0 && showSuggestions && (
                         <div className="no-movie">
-                            <h2>Sorry, there is no movie with the title:</h2>
-                            <h2 className="middle">{`${query}`}</h2>
-                            <h2>Please try another movie title.</h2>
+                            <p>Sorry, there is no movie with the title:</p>
+                            <p className="middle">{`${query}`}</p>
+                            <p>Please try another movie title.</p>
                         </div>
                     )}
                     {loading && query.length !== 0 && (
                         <div className="loading">
-                            <h1>Loading...</h1>
+                            <p>Loading...</p>
                         </div>
                     )}
                     <div className="card-list">
