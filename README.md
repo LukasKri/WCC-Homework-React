@@ -4,6 +4,8 @@ Sukurkite paieškos _autocomplete_ web komponentą, kurio pagalba vartotojas gal
 
 **_Norint sėkmingai atlikti užduotį, nebūtina turėti patirties su moderniais JavaScript karkasais. Stenkitės rašyti kuo paprastesnį ir aiškesnį kodą. Akademijos tikslas yra kartu išmokti geriausių programavimo praktikų, todėl nesidrovėkite atsiųsti bet kokios savo darbo versijos._**
 
+## Mano išpildymas
+![ss](https://user-images.githubusercontent.com/23439837/121070302-38d03f80-c7d7-11eb-927c-7c3ecc568f33.jpg)
 
 ## Pradiniai reikalavimai
 1. Dizainą įgyvendinti kuo panašesnį į pateiktą žemiau. Pikselių nematuosime, tačiau į centravimą ir bendrą išdėstymą atsižvelgsime. 
@@ -28,20 +30,9 @@ Sukurkite paieškos _autocomplete_ web komponentą, kurio pagalba vartotojas gal
 4. Iškilus klausimams dėl užduoties formuluočių, pateikite klausimą `Github Issues` skiltyje ir mes kaip galima greičiau atsakysime.
 5. Pabaigus užduotį, atsiųskite savo Github repozitorijos adresą kartu su registracijos forma.
 
-### Kaip gauti `api_key` skirtą themoviedb api
-1. Einame į `https://www.themoviedb.org/`
-2. Užsiregistruojame
-3. Patvirtiname email'ą
-4. Prisijungiame
-5. Spaudžiame ant avataro, einame į `settings`
-6. Pasirenkame `API` sekciją
-7. Susikuriame `API key`, spaudžiame create ir užpildome reikiamą informaciją sekdami vedlį
-8. Gauname `api_key`
-
-
-
-## Dizainas
+## Reikalaujamas dizainas
 
 ![Default state](images/default_state.png?raw=true "Default state")
 ![Results state](images/results_state.png?raw=true "Results state")
 ![Selected text](images/selected_state.png?raw=true "Selected state")
+
