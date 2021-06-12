@@ -5,6 +5,9 @@ Sukurkite paieškos _autocomplete_ web komponentą, kurio pagalba vartotojas gal
 **_Norint sėkmingai atlikti užduotį, nebūtina turėti patirties su moderniais JavaScript karkasais. Stenkitės rašyti kuo paprastesnį ir aiškesnį kodą. Akademijos tikslas yra kartu išmokti geriausių programavimo praktikų, todėl nesidrovėkite atsiųsti bet kokios savo darbo versijos._**
 
 ## Mano išpildymas
+
+# [DEMO](https://sleepy-scrubland-22976.herokuapp.com/)
+
 ![ss](https://user-images.githubusercontent.com/23439837/121070302-38d03f80-c7d7-11eb-927c-7c3ecc568f33.jpg)
 
 ## Pradiniai reikalavimai
