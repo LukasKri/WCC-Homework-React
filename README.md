@@ -8,7 +8,7 @@ Sukurkite paieškos _autocomplete_ web komponentą, kurio pagalba vartotojas gal
 
 # [DEMO](https://sleepy-scrubland-22976.herokuapp.com/)
 
-![ss](https://user-images.githubusercontent.com/23439837/121070302-38d03f80-c7d7-11eb-927c-7c3ecc568f33.jpg)
+![project-gif 800x600](https://user-images.githubusercontent.com/23439837/124349049-eb889780-dbf5-11eb-9717-786842f1a477.gif)
 
 ## Pradiniai reikalavimai
 1. Dizainą įgyvendinti kuo panašesnį į pateiktą žemiau. Pikselių nematuosime, tačiau į centravimą ir bendrą išdėstymą atsižvelgsime. 
