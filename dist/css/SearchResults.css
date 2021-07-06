@@ -1,0 +1,16 @@
+h3,
+p {
+  margin: 0;
+}
+
+.results-row {
+  padding: 10px 0 10px 50px;
+  position: relative;
+  right: 50px;
+  width: 750px;
+}
+
+.results-row:hover {
+  background-color: #e6ebef;
+  cursor: pointer;
+}
